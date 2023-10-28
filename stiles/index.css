@@ -24,6 +24,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow-x: hidden;
   min-width: 320px;
@@ -38,6 +40,10 @@ body {
   color: #292d32;
   background-color: #fff;
   line-height: 1.2;
+}
+
+.main {
+  flex-grow: 1;
 }
 
 img,
