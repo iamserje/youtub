@@ -273,7 +273,7 @@ iframe {
   display: none;
 }
 
-.video-card__favorite_active .star {
+.video-card__favorite.active .star {
   display: block;
 }
 
@@ -343,19 +343,19 @@ iframe {
   letter-spacing: 0.02em;
 }
 
-.video__link .video__no-favorite {
+.video-card__link .video__no-favorite {
   display: block;
 }
 
-.video__link .video__favorite {
+.video-card__link .video__favorite {
   display: none;
 }
 
-.video__link_active .video__no-favorite {
+.video-card__link.active .video__no-favorite {
   display: none;
 }
 
-.video__link_active .video__favorite {
+.video-card__link.active .video__favorite {
   display: block;
 }
 
