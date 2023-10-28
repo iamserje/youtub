@@ -24,6 +24,24 @@ const fetchTrendVideos = async () => {
    }
 };
 
+const fetchInCategoryVideos = async () => {
+   try {
+      const url = new URL(VIDEOS_URL);
+      url.searchParams.append('part', 'contentDetails,id,snippet');
+      url.searchParams.append('chart', 'videoCategoryId');
+      url.searchParams.append('maxResults', 12);
+      url.searchParams.append('regionCode', 'US');
+      url.searchParams.append('key', API_KEY);
+      const response = await fetch(url);
+      if (!response.ok) {
+         throw new Error(`HTTP error ${response.status}`);
+      }
+      return await response.json();
+   } catch (error) {
+      console.error("Catched error:", error);
+   }
+};
+
 const fetchFavoriteVideos = async () => {
    try {
       if (favoriteIds.length === 0) return {items: []};
@@ -144,7 +162,7 @@ const displayVideo = ({items: [video]}) => {
                   ${video.snippet.description}
                </p>
             </div>
-            <button class="video__link favorite"  href="favorite.html">
+            <button class="video__link favorite ${favoriteIds.includes(video.id) ? "active" : ""}"  href="favorite.html">
                <span class="video__no-favorite">Избранное</span>
                <span class="video__favorite">B Избранное</span>
                <svg class="video__icon">
@@ -168,6 +186,7 @@ const init = () => {
       fetchTrendVideos().then(displayListVideo);
    } else if (currentPage === 'video.html' && videoId) {
       fetchVideoData(videoId).then(displayVideo);
+      fetchTrendVideos().then(displayListVideo);
    } else if (currentPage === 'favorite.html') {
       fetchFavoriteVideos().then(displayListVideo);
    } else if (currentPage === 'search.html' || searchQuery) {
